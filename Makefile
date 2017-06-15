@@ -20,6 +20,10 @@
 # .PHONY: all build tag_latest push push_latest run last_built_date
 
 
+# GIT Variables
+GIT_REVID_SHORT = `git rev-parse --short HEAD`
+
+
 all: build
 
 #
@@ -27,16 +31,18 @@ all: build
 #
 clean:
 	@rm -rf RELEASE.txt
+	@rm -rf target
+
 
 build:
 	# docker build -t $(NAME):$(VERSION) --rm .
 	docker build -t narvekarh/myapp1 .
 
-# target:
-# 	@mkdir target
+target:
+	@mkdir target
 
 publish: 
-	@echo "$(GIT_REVID_SHORT)" > RELEASE.txt
+	@echo "`git rev-parse --short HEAD`" > RELEASE.txt
 
 tag_latest:
 	docker tag -f $(NAME):$(VERSION) $(NAME):latest
