@@ -27,8 +27,8 @@ all: build
 # Clean and build
 #
 clean:
+	@rm -rf RELEASE.txt/RELEASE.txt
 	@rm -rf RELEASE.txt
-	@rm -rf target
 
 
 build:
