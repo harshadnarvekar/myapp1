@@ -55,7 +55,7 @@ build:
 target:
 	@mkdir latestgit
 
-publish: latestgit
+publish: target
 	# @echo -e "$(GREEN)Publishing archive at target/$(RESET)"
 	# @mv $(ARCHIVE) target/
 	# @echo "$(ARCHIVE)" > target/PACKAGE.txt
