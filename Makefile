@@ -62,10 +62,11 @@ target:
 	@mkdir target
 
 publish: target
-	@echo -e "$(GREEN)Publishing archive at target/$(RESET)"
-	@mv $(ARCHIVE) target/
-	@echo "$(ARCHIVE)" > target/PACKAGE.txt
-	@echo "$(RELEASE)" > target/RELEASE.txt
+	# @echo -e "$(GREEN)Publishing archive at target/$(RESET)"
+	# @mv $(ARCHIVE) target/
+	# @echo "$(ARCHIVE)" > target/PACKAGE.txt
+	# @echo "$(RELEASE)" > target/RELEASE.txt
+	@echo "baba" > RELEASE.txt
 
 tag_latest:
 	docker tag -f $(NAME):$(VERSION) $(NAME):latest
