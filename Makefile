@@ -20,7 +20,7 @@
 # .PHONY: all build tag_latest push push_latest run last_built_date
 
 
-TARGETS = latestgit
+TARGETS = www target .tmp
 SERVICE_NAME = beta-tab-redbook
 SERVER_IP = luxdev.beta.tab.com.au
 
@@ -52,11 +52,21 @@ build:
 	# docker build -t $(NAME):$(VERSION) --rm .
 	docker build -t narvekarh/myapp1 .
 
+archive: build
+	@echo -e "$(GREEN)Archiving distribution to $(ARCHIVE)$(RESET)"
+	@echo "$(RELEASE)" > dist/VERSION
+	@mv dist www
+	@tar -cf $(ARCHIVE) www/* www/.well-known
+
 target:
-	@mkdir latestgit
+	@mkdir target
 
 publish: target
-	@echo "$(RELEASE)" > latestgit/RELEASE.txt
+	# @echo -e "$(GREEN)Publishing archive at target/$(RESET)"
+	# @mv $(ARCHIVE) target/
+	# @echo "$(ARCHIVE)" > target/PACKAGE.txt
+	# @echo "$(RELEASE)" > target/RELEASE.txt
+	@echo "$(GIT_REVID_SHORT)" > RELEASE.txt
 
 tag_latest:
 	docker tag -f $(NAME):$(VERSION) $(NAME):latest
