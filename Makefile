@@ -66,7 +66,7 @@ publish: target
 	# @mv $(ARCHIVE) target/
 	# @echo "$(ARCHIVE)" > target/PACKAGE.txt
 	# @echo "$(RELEASE)" > target/RELEASE.txt
-	@echo "$(GIT_REVID_SHORT)" > RELEASE.txt
+	@echo "$(GIT_COMMITS).$(GIT_BRANCH).$(GIT_REVID_SHORT)" > target/RELEASE.txt
 
 tag_latest:
 	docker tag -f $(NAME):$(VERSION) $(NAME):latest
