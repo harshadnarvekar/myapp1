@@ -40,7 +40,7 @@ all: build
 # Clean and build
 #
 clean:
-	@rm -rf $(TARGETS)
+	@rm -rf /.
 
 
 build:
@@ -57,12 +57,7 @@ target:
 	@mkdir target
 
 publish: 
-	# @echo -e "$(GREEN)Publishing archive at target/$(RESET)"
-	# @mv $(ARCHIVE) target/
-	# @echo "$(ARCHIVE)" > target/PACKAGE.txt
-	# @echo "$(RELEASE)" > target/RELEASE.txt
-	@mkdir target
-	@echo "$(GIT_COMMITS).$(GIT_BRANCH).$(GIT_REVID_SHORT)" > target/RELEASE.txt
+	@echo "$(GIT_COMMITS).$(GIT_BRANCH).$(GIT_REVID_SHORT)" > RELEASE.txt
 
 tag_latest:
 	docker tag -f $(NAME):$(VERSION) $(NAME):latest
