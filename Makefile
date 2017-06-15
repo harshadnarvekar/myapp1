@@ -20,15 +20,6 @@
 # .PHONY: all build tag_latest push push_latest run last_built_date
 
 
-# GIT Variables
-GIT_BRANCH = `git rev-parse --abbrev-ref HEAD`
-GIT_APPVERSION = `git describe --tags --abbrev=0`
-GIT_COMMITS = $(shell git log $(GIT_APPVERSION)..HEAD --oneline | wc -l | tr -d ' ')
-GIT_REVID = `git rev-parse HEAD`
-GIT_REVID_SHORT = `git rev-parse --short HEAD`
-RELEASE = "$(GIT_APPVERSION)-$(GIT_COMMITS).$(GIT_BRANCH).$(GIT_REVID_SHORT)"
-ARCHIVE_SOURCE = "tabcorp-online-$(RELEASE)"
-ARCHIVE = $(ARCHIVE_SOURCE).tar.gz
 
 all: build
 
@@ -48,7 +39,7 @@ target:
 	@mkdir target
 
 publish: 
-	@echo "$(GIT_BRANCH).$(GIT_REVID_SHORT)" > RELEASE.txt
+	@echo "`git rev-parse --short HEAD`" > RELEASE.txt
 
 tag_latest:
 	docker tag -f $(NAME):$(VERSION) $(NAME):latest
