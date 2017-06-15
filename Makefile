@@ -40,7 +40,7 @@ all: build
 # Clean and build
 #
 clean:
-	@rm -rf /.
+	@rm -rf RELEASE.txt
 
 
 build:
