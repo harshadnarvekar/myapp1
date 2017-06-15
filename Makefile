@@ -27,16 +27,12 @@ all: build
 # Clean and build
 #
 clean:
-	@rm -rf RELEASE.txt/RELEASE.txt
 	@rm -rf RELEASE.txt
 
 
 build:
 	# docker build -t $(NAME):$(VERSION) --rm .
 	docker build -t narvekarh/myapp1 .
-
-target:
-	@mkdir target
 
 publish: 
 	@echo "`git rev-parse --short HEAD`" > RELEASE.txt
