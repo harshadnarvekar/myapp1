@@ -29,7 +29,6 @@ all: build
 clean:
 	@rm -rf RELEASE.txt
 
-
 build:
 	# docker build -t $(NAME):$(VERSION) --rm .
 	docker build -t narvekarh/myapp1 .
