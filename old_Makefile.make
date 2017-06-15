@@ -20,9 +20,14 @@
 # .PHONY: all build tag_latest push push_latest run last_built_date
 
 
-TARGETS = target
+TARGETS = latestgit
 SERVICE_NAME = beta-tab-redbook
 SERVER_IP = luxdev.beta.tab.com.au
+
+RESET=\x1b[0m
+GREEN=\x1b[32;01m
+RED=\x1b[31;01m
+YELLOW=\x1b[33;01m
 
 # GIT Variables
 GIT_BRANCH = `git rev-parse --abbrev-ref HEAD`
@@ -47,22 +52,11 @@ build:
 	# docker build -t $(NAME):$(VERSION) --rm .
 	docker build -t narvekarh/myapp1 .
 
-archive: build
-	@echo -e "$(GREEN)Archiving distribution to $(ARCHIVE)$(RESET)"
-	@echo "$(RELEASE)" > dist/VERSION
-	@mv dist www
-	@tar -cf $(ARCHIVE) www/* www/.well-known
-
 target:
-	@mkdir target
+	@mkdir latestgit
 
-publish: 
-	# @echo -e "$(GREEN)Publishing archive at target/$(RESET)"
-	# @mv $(ARCHIVE) target/
-	# @echo "$(ARCHIVE)" > target/PACKAGE.txt
-	# @echo "$(RELEASE)" > target/RELEASE.txt
-	@mkdir target
-	@echo "$(GIT_COMMITS).$(GIT_BRANCH).$(GIT_REVID_SHORT)" > target/RELEASE.txt
+publish: target
+	@echo "$(RELEASE)" > latestgit/RELEASE.txt
 
 tag_latest:
 	docker tag -f $(NAME):$(VERSION) $(NAME):latest
