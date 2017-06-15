@@ -20,10 +20,6 @@
 # .PHONY: all build tag_latest push push_latest run last_built_date
 
 
-TARGETS = target
-SERVICE_NAME = beta-tab-redbook
-SERVER_IP = luxdev.beta.tab.com.au
-
 # GIT Variables
 GIT_BRANCH = `git rev-parse --abbrev-ref HEAD`
 GIT_APPVERSION = `git describe --tags --abbrev=0`
@@ -41,23 +37,18 @@ all: build
 #
 clean:
 	@rm -rf RELEASE.txt
+	@rm -rf target
 
 
 build:
 	# docker build -t $(NAME):$(VERSION) --rm .
 	docker build -t narvekarh/myapp1 .
 
-archive: build
-	@echo -e "$(GREEN)Archiving distribution to $(ARCHIVE)$(RESET)"
-	@echo "$(RELEASE)" > dist/VERSION
-	@mv dist www
-	@tar -cf $(ARCHIVE) www/* www/.well-known
-
 target:
 	@mkdir target
 
 publish: 
-	@echo "$(GIT_COMMITS).$(GIT_BRANCH).$(GIT_REVID_SHORT)" > RELEASE.txt
+	@echo "$(GIT_BRANCH).$(GIT_REVID_SHORT)" > RELEASE.txt
 
 tag_latest:
 	docker tag -f $(NAME):$(VERSION) $(NAME):latest
